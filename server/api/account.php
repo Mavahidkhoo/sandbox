@@ -3,10 +3,7 @@ require_once 'master.php';
 switch ($_POST['CRUD']) {
     case 'sign-up';
         if (
-            !isset($_POST['name']) || !isset($_POST['family'])  || !isset($_POST['username'])  ||
-            !isset($_POST['password']) || !isset($_POST['password2'])  || !isset($_POST['profileImage'])  ||
-            !isset($_POST['bio'])  || !isset($_POST['linkedin'])  || !isset($_POST['instagram'])  ||
-            !isset($_POST['telegram'])  || !isset($_POST['github'])
+            !isset($_POST['name']) || !isset($_POST['family'])  || !isset($_POST['username'])  || !isset($_POST['password']) || !isset($_POST['password2'])
         ) {
             Utils::result(true, array(
                 'message' => 'Missing post parameters'
@@ -47,13 +44,7 @@ switch ($_POST['CRUD']) {
                 'name' => $_POST['name'],
                 'family' => $_POST['family'],
                 'username' => $_POST['username'],
-                'password' => $_POST['password'],
-                'profileImage' => $_POST['profileImage'],
-                'bio' => $_POST['bio'],
-                'linkedin' => $_POST['linkedin'],
-                'instagram' => $_POST['instagram'],
-                'telegram' => $_POST['telegram'],
-                'github' => $_POST['github']
+                'password' => $_POST['password']
             )
         );
         if (is_array($insert) && $insert[0] == 'true') {
@@ -98,6 +89,22 @@ switch ($_POST['CRUD']) {
         }
         Utils::result(true, array(
             'message' => 'Incorrect username or password'
+        ));
+        break;
+    case 'sign-out':
+        if (isset($_SESSION['signed-in'])) {
+            session_destroy();
+        }
+        if (isset($_POST['destination']) && trim($_POST['destination']) != '') {
+            header('Location: ' . $_POST['destination']);
+        }
+        Utils::result(false, array(
+            'message' => 'Signed out successfully'
+        ));
+        break;
+    default:
+        Utils::result(true, array(
+            'message' => 'Invalid CRUD'
         ));
         break;
 }
