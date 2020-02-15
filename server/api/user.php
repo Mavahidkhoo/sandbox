@@ -55,6 +55,38 @@ switch ($_POST['CRUD']) {
             $select == 'rowCountFalse' ? array('message' => 'No user yet') : $select
         );
         break;
+    case 'get':
+        /*
+            @desc   This CRUD use to get full information of given userId
+            @method POST
+            @params userId
+        */
+        if (!isset($_POST['userId'])) {
+            Utils::result(true, array(
+                'message' => 'Missing post parameters'
+            ));
+        }
+        $select = $operation->select(
+            'users',
+            array(
+                " CONCAT(name, ' ', family) AS name",
+                'username',
+                'profileImage',
+                'bio',
+                'linkedIn',
+                'instagram',
+                'telegram',
+                'github'
+            ),
+            ' id = ' . $_POST['userId']
+        );
+        if ($select != 'rowCountFalse') {
+            Utils::result(false, $select[0]);
+        }
+        Utils::result(true, array(
+            'message' => 'User not found'
+        ));
+        break;
     default:
         Utils::result(true, array(
             'message' => 'Invalid CRUD'
