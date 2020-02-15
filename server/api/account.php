@@ -2,6 +2,16 @@
 require_once 'master.php';
 switch ($_POST['CRUD']) {
     case 'sign-up';
+        /*
+            @desc   This CRUD use for create new account in system
+            @method POST
+            @params name        (first name of new user)
+                    family      (last name of new user)
+                    username    (username of new user between 4 and 40 characters)
+                    password    (password of new user between 6 and 20 characters)
+                    password2   (confirm of password that should match password)
+        */
+        # Check POST parameters
         if (
             !isset($_POST['name']) || !isset($_POST['family'])  || !isset($_POST['username'])  || !isset($_POST['password']) || !isset($_POST['password2'])
         ) {
@@ -10,12 +20,14 @@ switch ($_POST['CRUD']) {
             ));
         }
 
+        # Check username length (must between 4 and 40 chars)
         if (strlen($_POST['username']) < 4 || strlen($_POST['username']) > 40) {
             Utils::result(true, array(
                 'message' => 'Username must between 4 and 40 characters'
             ));
         }
 
+        # Check username in database (should be unique)
         $usernameCheck = $operation->select('users', array('id'), " username = '" . $_POST['username'] . "'");
         if ($usernameCheck != 'rowCountFalse') {
             Utils::result(true, array(
@@ -23,17 +35,21 @@ switch ($_POST['CRUD']) {
             ));
         }
 
+        # Check password length (must between 6 and 20 chars)
         if (strlen($_POST['password']) < 6 || strlen($_POST['password']) > 20) {
             Utils::result(true, array(
                 'message' => 'Password must between 6 and 20 characters'
             ));
         }
 
+        # Check password and confirm password (must match)
         if ($_POST['password'] !== $_POST['password2']) {
             Utils::result(true, array(
                 'message' => 'Password and confirm password not match'
             ));
         }
+
+        # Hash password
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         $insert = $operation->insert(
@@ -45,6 +61,7 @@ switch ($_POST['CRUD']) {
                 'password' => $_POST['password']
             )
         );
+        # Check to see inserted or not
         if (is_array($insert) && $insert[0] == 'true') {
             Utils::result(false, array(
                 'message' => 'User created successfully',
@@ -56,6 +73,13 @@ switch ($_POST['CRUD']) {
         ));
         break;
     case 'sign-in':
+        /*
+            @desc   This CRUD use to sign in user
+            @method POST
+            @params username
+                    password
+        */
+        # Check POST parameters
         if (!isset($_POST['username']) || !isset($_POST['password'])) {
             Utils::result(true, array(
                 'message' => 'Missing post parameters'
@@ -74,6 +98,7 @@ switch ($_POST['CRUD']) {
         if ($select != 'rowCountFalse') {
             $select = $select[0];
             if (password_verify($_POST['password'], $select['password'])) {
+                # Store account information into session for future uses
                 session_regenerate_id();
                 $_SESSION['signedIn'] = true;
                 $_SESSION['userId'] = $select['id'];
@@ -90,6 +115,12 @@ switch ($_POST['CRUD']) {
         ));
         break;
     case 'sign-out':
+        /*
+            @desc   This CRUD use to sign out user
+            @method POST
+            @params destination [optional] (if set, after signing out redirect to this address)
+        */
+        # Destroy session if exists
         if (isset($_SESSION['signedIn'])) {
             session_destroy();
         }
@@ -101,6 +132,10 @@ switch ($_POST['CRUD']) {
         ));
         break;
     case 'get':
+        /*
+            @desc   This CRUD use to get the current user full information 
+            @method POST
+        */
         if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
             Utils::result(true, array(
                 'message' => 'Unauthorized'
@@ -127,11 +162,25 @@ switch ($_POST['CRUD']) {
         ));
         break;
     case 'edit-profile':
+        /*
+            @desc   This CRUD use for edit information of current user
+            @method POST
+            @params name
+                    family
+                    username
+                    profileImage [base46 image]
+                    bio 
+                    linkedin
+                    instageam
+                    telegram
+                    github
+        */
         if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
             Utils::result(true, array(
                 'message' => 'Unauthorized'
             ));
         }
+        # Check POST parameters
         if (
             !isset($_POST['name']) || !isset($_POST['family'])  || !isset($_POST['username'])  || !isset($_POST['profileImage']) || !isset($_POST['bio']) || !isset($_POST['linkedin']) || !isset($_POST['instagram']) || !isset($_POST['telegram']) || !isset($_POST['github'])
         ) {
@@ -140,26 +189,24 @@ switch ($_POST['CRUD']) {
             ));
         }
 
+        # Check emptiness of name, family and username 
         if (trim($_POST['name']) == '') {
             Utils::result(true, array(
                 'message' => 'Name can not be empty'
             ));
         }
-
-
         if (trim($_POST['family']) == '') {
             Utils::result(true, array(
                 'message' => 'Family can not be empty'
             ));
         }
-
-
         if (trim($_POST['username']) == '') {
             Utils::result(true, array(
                 'message' => 'Username can not be empty'
             ));
         }
 
+        # Check username length (must between 4 and 40 characters)
         if (strlen($_POST['username']) < 4 || strlen($_POST['username']) > 40) {
             Utils::result(true, array(
                 'message' => 'Username must between 4 and 40 characters'
@@ -168,6 +215,7 @@ switch ($_POST['CRUD']) {
 
         $select = $operation->select('users', '*', ' id = ' . $_SESSION['userId']);
         if ($select != 'rowCountFalse') {
+            # Check username in database (should be unique)
             $usernameCheck = $operation->select(
                 'users',
                 array('id'),
@@ -179,6 +227,7 @@ switch ($_POST['CRUD']) {
                 ));
             }
 
+            # Check profileImage (if empty: set the default profile, if ___NO_CHANGE___: set the old profile)
             if (trim($_POST['profileImage']) != '') {
                 if ($_POST['profileImage'] == '___NO_CHANGE___') {
                     $_POST['profileImage'] = $select['profileImage'];
@@ -210,6 +259,7 @@ switch ($_POST['CRUD']) {
                 )
             );
 
+            # If update successful, update $_SESSION values that may be changed
             if ($update === 'true') {
                 $_SESSION['username'] = $_POST['username'];
                 $_SESSION['name'] = $_POST['name'] . ' ' . $_POST['family'];
@@ -223,6 +273,13 @@ switch ($_POST['CRUD']) {
         ));
         break;
     case 'change-password':
+        /*
+            @desc   This CRUD use for change password of current user
+            @method POST
+            @params password (the old password)
+                    newPassword
+                    password2
+        */
         if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
             Utils::result(true, array(
                 'message' => 'Unauthorized'
@@ -250,6 +307,7 @@ switch ($_POST['CRUD']) {
                         'message' => 'Password and confirm password not match'
                     ));
                 }
+                # Hash new password
                 $_POST['newPassword'] = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
                 $update = $operation->update(
                     'users',
