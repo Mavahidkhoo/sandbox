@@ -22,4 +22,9 @@ switch ($_POST['CRUD']) {
             $select == 'rowCountFalse' ? array('message' => 'No user yet') : $select
         );
         break;
+    default:
+        Utils::result(true, array(
+            'message' => 'Invalid CRUD'
+        ));
+        break;
 }
