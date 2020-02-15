@@ -10,7 +10,7 @@ switch ($_POST['CRUD']) {
         */
         # Check search params are set or not
         $search = ' 1 ';
-        if (isset($_POST['searchColumn']) && trim($_POST['searchColumn']) != '' && $_POST['searchString'] && trim($_POST['searchString'])) {
+        if (isset($_POST['searchColumn']) && trim($_POST['searchColumn']) != '' && isset($_POST['searchString']) && trim($_POST['searchString'])) {
             # Check searchString length
             if (strlen($_POST['searchString']) < 3) {
                 Utils::result(true, array(
