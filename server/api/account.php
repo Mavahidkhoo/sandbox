@@ -222,6 +222,57 @@ switch ($_POST['CRUD']) {
             'message' => 'Server error'
         ));
         break;
+    case 'change-password':
+        if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
+            Utils::result(true, array(
+                'message' => 'Unauthorized'
+            ));
+        }
+
+        if (!isset($_POST['password']) || !isset($_POST['newPassword'])  || !isset($_POST['password2'])) {
+            Utils::result(true, array(
+                'message' => 'Missing post parameters'
+            ));
+        }
+
+        $select = $operation->select('users', array('password'), ' id = ' . $_SESSION['userId']);
+        if ($select != 'rowCountFalse') {
+
+            if (password_verify($_POST['password'], $select[0]['password'])) {
+                if (strlen($_POST['newPassword']) < 6 || strlen($_POST['newPassword']) > 20) {
+                    Utils::result(true, array(
+                        'message' => 'Password must between 6 and 20 characters'
+                    ));
+                }
+
+                if ($_POST['newPassword'] !== $_POST['password2']) {
+                    Utils::result(true, array(
+                        'message' => 'Password and confirm password not match'
+                    ));
+                }
+                $_POST['newPassword'] = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+                $update = $operation->update(
+                    'users',
+                    array(
+                        'password' => $_POST['newPassword'],
+                        'id' => $_SESSION['userId']
+                    )
+                );
+                if ($update === 'true') {
+                    Utils::result(false, array(
+                        'message' => 'Password changed successfully'
+                    ));
+                }
+            } else {
+                Utils::result(true, array(
+                    'message' => 'Incorrect password'
+                ));
+            }
+        }
+        Utils::result(true, array(
+            'message' => 'Server error'
+        ));
+        break;
     default:
         Utils::result(true, array(
             'message' => 'Invalid CRUD'
