@@ -136,12 +136,9 @@ switch ($_POST['CRUD']) {
             @desc   This CRUD use to get the current user full information 
             @method POST
         */
-        # Check if user signed in or not
-        if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
-            Utils::result(true, array(
-                'message' => 'Unauthorized'
-            ));
-        }
+
+        authenticate();
+
         $select = $operation->select(
             'users',
             array(
@@ -176,12 +173,9 @@ switch ($_POST['CRUD']) {
                     telegram
                     github
         */
-        # Check if user signed in or not
-        if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
-            Utils::result(true, array(
-                'message' => 'Unauthorized'
-            ));
-        }
+
+        authenticate();
+
         # Check POST parameters
         if (
             !isset($_POST['name']) || !isset($_POST['family'])  || !isset($_POST['username'])  || !isset($_POST['profileImage']) || !isset($_POST['bio']) || !isset($_POST['linkedin']) || !isset($_POST['instagram']) || !isset($_POST['telegram']) || !isset($_POST['github'])
@@ -282,12 +276,8 @@ switch ($_POST['CRUD']) {
                     newPassword
                     password2
         */
-        # Check if user signed in or not
-        if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
-            Utils::result(true, array(
-                'message' => 'Unauthorized'
-            ));
-        }
+
+        authenticate();
 
         if (!isset($_POST['password']) || !isset($_POST['newPassword'])  || !isset($_POST['password2'])) {
             Utils::result(true, array(

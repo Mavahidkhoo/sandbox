@@ -63,12 +63,8 @@ switch ($_POST['CRUD']) {
             @params title   (The title of post. must between 3 and 150 characters)
                     body    (The post content, can't be empty)
         */
-        # Check if user signed in or not
-        if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
-            Utils::result(true, array(
-                'message' => 'Unauthorized'
-            ));
-        }
+
+        authenticate();
 
         # Check POST parameters and validate them
         validation();
@@ -101,12 +97,8 @@ switch ($_POST['CRUD']) {
                     title   (The title of post. must between 3 and 150 characters)
                     body    (The post content, can't be empty)
         */
-        # Check if user signed in or not
-        if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
-            Utils::result(true, array(
-                'message' => 'Unauthorized'
-            ));
-        }
+
+        authenticate();
 
         # Check POST parameters and validate them
         validation();
