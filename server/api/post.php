@@ -1,5 +1,6 @@
 <?php
 require_once 'master.php';
+
 function validation()
 {
     # Check POST parameters
@@ -20,6 +21,19 @@ function validation()
     if (trim($_POST['body']) == '') {
         Utils::result(true, array(
             'message' => 'Post body can not be empty'
+        ));
+    }
+}
+
+/* 
+    @desc: Check if this post(that specified by $_POST['postId']) belong to current user or not, and even exists or not
+*/
+function checkOwnership()
+{
+    $select = $GLOBALS['operation']->select('posts', array('userId'), ' id = ' . $_POST['postId'] . ' AND userId = ' . $_SESSION['userId']);
+    if ($select == 'rowCountFalse') {
+        Utils::result(true, array(
+            'message' => 'Post not found or permission error'
         ));
     }
 }
@@ -102,14 +116,7 @@ switch ($_POST['CRUD']) {
 
         # Check POST parameters and validate them
         validation();
-
-        # Check if this post belong to current user or not, and if this post even exists or not
-        $select = $operation->select('posts', array('userId'), ' id = ' . $_POST['postId'] . ' AND userId = ' . $_SESSION['userId']);
-        if ($select == 'rowCountFalse') {
-            Utils::result(true, array(
-                'message' => 'Post not found or permission error'
-            ));
-        }
+        checkOwnership();
 
         $update = $operation->update(
             'posts',
@@ -124,6 +131,33 @@ switch ($_POST['CRUD']) {
         if ($update === 'true') {
             Utils::result(false, array(
                 'message' => 'Post updated successfully'
+            ));
+        }
+        Utils::result(true, array(
+            'message' => 'Server error'
+        ));
+        break;
+    case 'delete':
+        /*
+            @desc   This CRUD use for delete the post that specified by postId, if belong to current user
+            @method POST
+            @params postId
+        */
+
+        # Check POST parameters
+        if (!isset($_POST['postId'])) {
+            Utils::result(true, array(
+                'message' => 'Missing post parameters'
+            ));
+        }
+
+        authenticate();
+        checkOwnership();
+
+        $delete = $operation->delete('posts', 'id', $_POST['postId']);
+        if ($delete === 'true') {
+            Utils::result(false, array(
+                'message' => 'Post deleted successfully'
             ));
         }
         Utils::result(true, array(
