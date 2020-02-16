@@ -36,8 +36,8 @@ switch ($_POST['CRUD']) {
         /*
             @desc   This CRUD use for create new post for current user
             @method POST
-            @params title (The title of post. must between 3 and 150 characters)
-                    body (The post content, can't be empty)
+            @params title   (The title of post. must between 3 and 150 characters)
+                    body    (The post content, can't be empty)
         */
         # Check if user signed in or not
         if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
@@ -81,6 +81,67 @@ switch ($_POST['CRUD']) {
             Utils::result(false, array(
                 'message' => 'Post created successfully',
                 'postId' => $insert[1]
+            ));
+        }
+        Utils::result(true, array(
+            'message' => 'Server error'
+        ));
+        break;
+    case 'update':
+        /*
+            @desc   This CRUD use for update the post that specified by postId, if belong to current user
+            @method POST
+            @params postId
+                    title   (The title of post. must between 3 and 150 characters)
+                    body    (The post content, can't be empty)
+        */
+        # Check if user signed in or not
+        if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
+            Utils::result(true, array(
+                'message' => 'Unauthorized'
+            ));
+        }
+
+        # Check POST parameters
+        if (!isset($_POST['title']) || !isset($_POST['body'])) {
+            Utils::result(true, array(
+                'message' => 'Missing post parameters'
+            ));
+        }
+
+        if (mb_strlen($_POST['title']) < 3 || mb_strlen($_POST['title']) > 150) {
+            Utils::result(true, array(
+                'message' => 'Post title must between 3 and 150 characters'
+            ));
+        }
+
+        if (trim($_POST['body']) == '') {
+            Utils::result(true, array(
+                'message' => 'Post body can not be empty'
+            ));
+        }
+
+        # Check if this post belong to current user or not, and if this post even exists or not
+        $select = $operation->select('posts', array('userId'), ' id = ' . $_POST['postId'] . ' AND userId = ' . $_SESSION['userId']);
+        if ($select == 'rowCountFalse') {
+            Utils::result(true, array(
+                'message' => 'Post not found or permission error'
+            ));
+        }
+
+        $update = $operation->update(
+            'posts',
+            array(
+                'title' => $_POST['title'],
+                'body' => $_POST['body'],
+                'edited' => TRUE,
+                'id' => $_POST['postId']
+            )
+        );
+
+        if ($update === 'true') {
+            Utils::result(true, array(
+                'message' => 'Post updated successfully'
             ));
         }
         Utils::result(true, array(
