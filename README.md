@@ -54,7 +54,7 @@ A step by step series of examples that tell you how to get a development env run
 ## Contact me
 
 - [Send me email](mailto:hi@androsein.ir)
-- [Telegram](t.me/androsein)
+- [Telegram](https://t.me/androsein)
 - Or if you can see me, see me :neutral_face:
 
 ## License
