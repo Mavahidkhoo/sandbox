@@ -1,5 +1,29 @@
 <?php
 require_once 'master.php';
+function validation()
+{
+    # Check POST parameters
+    if (!isset($_POST['title']) || !isset($_POST['body']) || ($_POST['CRUD'] === 'update' && !isset($_POST['postId']))) {
+        Utils::result(true, array(
+            'message' => 'Missing post parameters'
+        ));
+    }
+
+    # Using mb_strlen() instead of strlen()
+    # HINT: Compare strlen('سلام') and mb_strlen('سلام')
+    if (mb_strlen($_POST['title']) < 3 || mb_strlen($_POST['title']) > 150) {
+        Utils::result(true, array(
+            'message' => 'Post title must between 3 and 150 characters'
+        ));
+    }
+
+    if (trim($_POST['body']) == '') {
+        Utils::result(true, array(
+            'message' => 'Post body can not be empty'
+        ));
+    }
+}
+
 switch ($_POST['CRUD']) {
     case 'list';
         /*
@@ -46,26 +70,8 @@ switch ($_POST['CRUD']) {
             ));
         }
 
-        # Check POST parameters
-        if (!isset($_POST['title']) || !isset($_POST['body'])) {
-            Utils::result(true, array(
-                'message' => 'Missing post parameters'
-            ));
-        }
-
-        # Using mb_strlen() instead of strlen()
-        # HINT: Compare strlen('سلام') and mb_strlen('سلام')
-        if (mb_strlen($_POST['title']) < 3 || mb_strlen($_POST['title']) > 150) {
-            Utils::result(true, array(
-                'message' => 'Post title must between 3 and 150 characters'
-            ));
-        }
-
-        if (trim($_POST['body']) == '') {
-            Utils::result(true, array(
-                'message' => 'Post body can not be empty'
-            ));
-        }
+        # Check POST parameters and validate them
+        validation();
 
         $insert = $operation->insert(
             'posts',
@@ -102,24 +108,8 @@ switch ($_POST['CRUD']) {
             ));
         }
 
-        # Check POST parameters
-        if (!isset($_POST['title']) || !isset($_POST['body'])) {
-            Utils::result(true, array(
-                'message' => 'Missing post parameters'
-            ));
-        }
-
-        if (mb_strlen($_POST['title']) < 3 || mb_strlen($_POST['title']) > 150) {
-            Utils::result(true, array(
-                'message' => 'Post title must between 3 and 150 characters'
-            ));
-        }
-
-        if (trim($_POST['body']) == '') {
-            Utils::result(true, array(
-                'message' => 'Post body can not be empty'
-            ));
-        }
+        # Check POST parameters and validate them
+        validation();
 
         # Check if this post belong to current user or not, and if this post even exists or not
         $select = $operation->select('posts', array('userId'), ' id = ' . $_POST['postId'] . ' AND userId = ' . $_SESSION['userId']);
@@ -140,7 +130,7 @@ switch ($_POST['CRUD']) {
         );
 
         if ($update === 'true') {
-            Utils::result(true, array(
+            Utils::result(false, array(
                 'message' => 'Post updated successfully'
             ));
         }
