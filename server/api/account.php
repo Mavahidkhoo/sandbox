@@ -136,6 +136,7 @@ switch ($_POST['CRUD']) {
             @desc   This CRUD use to get the current user full information 
             @method POST
         */
+        # Check if user signed in or not
         if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
             Utils::result(true, array(
                 'message' => 'Unauthorized'
@@ -175,6 +176,7 @@ switch ($_POST['CRUD']) {
                     telegram
                     github
         */
+        # Check if user signed in or not
         if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
             Utils::result(true, array(
                 'message' => 'Unauthorized'
@@ -280,6 +282,7 @@ switch ($_POST['CRUD']) {
                     newPassword
                     password2
         */
+        # Check if user signed in or not
         if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
             Utils::result(true, array(
                 'message' => 'Unauthorized'
