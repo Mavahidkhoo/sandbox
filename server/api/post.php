@@ -32,6 +32,61 @@ switch ($_POST['CRUD']) {
             $select == 'rowCountFalse' ? array('message' => 'No post yet') : $select
         );
         break;
+    case 'create':
+        /*
+            @desc   This CRUD use for create new post for current user
+            @method POST
+            @params title (The title of post. must between 3 and 150 characters)
+                    body (The post content, can't be empty)
+        */
+        # Check if user signed in or not
+        if (!isset($_SESSION['signedIn']) || !isset($_SESSION['userId']) || !$_SESSION['signedIn']) {
+            Utils::result(true, array(
+                'message' => 'Unauthorized'
+            ));
+        }
+
+        # Check POST parameters
+        if (!isset($_POST['title']) || !isset($_POST['body'])) {
+            Utils::result(true, array(
+                'message' => 'Missing post parameters'
+            ));
+        }
+
+        # Using mb_strlen() instead of strlen()
+        # HINT: Compare strlen('سلام') and mb_strlen('سلام')
+        if (mb_strlen($_POST['title']) < 3 || mb_strlen($_POST['title']) > 150) {
+            Utils::result(true, array(
+                'message' => 'Post title must between 3 and 150 characters'
+            ));
+        }
+
+        if (trim($_POST['body']) == '') {
+            Utils::result(true, array(
+                'message' => 'Post body can not be empty'
+            ));
+        }
+
+        $insert = $operation->insert(
+            'posts',
+            array(
+                'userId' => $_SESSION['userId'],
+                'title' => $_POST['title'],
+                'body' => $_POST['body'],
+                'date' => $currentDate // current date in shamsi format
+            )
+        );
+        # Check to see inserted or not
+        if (is_array($insert) && $insert[0] == 'true') {
+            Utils::result(false, array(
+                'message' => 'Post created successfully',
+                'postId' => $insert[1]
+            ));
+        }
+        Utils::result(true, array(
+            'message' => 'Server error'
+        ));
+        break;
     default:
         Utils::result(true, array(
             'message' => 'Invalid CRUD'
