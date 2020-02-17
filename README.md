@@ -1,4 +1,4 @@
-# Design-sandbox
+# sandbox
 
 A project that helps you use your experiences and test them
 
