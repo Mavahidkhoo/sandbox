@@ -34,7 +34,7 @@ A step by step series of examples that tell you how to get a development env run
 
 1. Start coding :smiley:
 
-1. When finished, push your works and [tell me](mailto:hi@androsein.ir) to take a look at it
+1. When finished, push your works and [tell me](#contact-me) to take a look at it
 
 ## Why
 
