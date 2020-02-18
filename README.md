@@ -6,6 +6,8 @@ A project that helps you use your experiences and test them
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+> Feel free to use this repo for test your trainees or employees, you can change everything :+1:
+
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -26,11 +28,22 @@ A step by step series of examples that tell you how to get a development env run
    ~ git clone https://github.com/[YOUR-GITHUB-USERNAME]/Design-sandbox.git
    ```
 
-1. Import `DATABASE/db_tmp.sql` into your localhost phpMyAdmin
+1. Import `DATABASE/db_tmp.sql` into your localhost phpMyAdmin (use [this](https://mediatemple.net/community/products/dv/204403864/export-and-import-mysql-databases#method1-import-dv) if you don't know how)
 
 1. Change `config/database.php` values into your phpMyAdmin settings
 
-1. Take a look at `INSTRUCTION.md` file and use it to design the system
+   ```PHP
+   <?php
+      // Change these values with database login values in your localhost or host
+      $databseConfig = array(
+         'server' => 'YOUR-SERVER', // Normally localhost
+         'database' => 'NAME-OF-DATABASE-IN-STEP-1',
+         'username' => 'USERNAME-OF-DATABASE-USER-YOU-CREATE', // If use XAMPP the default is root
+         'password' => 'PASSWORD-OF-DATABASE-USER-YOU-CREATE'  // If use XAMPP the default is empty
+      );
+   ```
+
+1. Take a look at [wiki](https://github.com/androsein/sandbox/wiki) and use it to design the system
 
 1. Start coding :smiley:
 
@@ -38,7 +51,8 @@ A step by step series of examples that tell you how to get a development env run
 
 ## Why
 
-- With this repo you can use your experiences in HTML, CSS, Bootstrap, JavaScript, JQuery and Git
+- With this repo you can use your experiences and test your expriences in web and mobile development
+- This is a good practice to contribute in a project using git and github
 - Get familiar with the development mechanism that i worked in my team
 - And at the end i can see how you design and develop in action
 
