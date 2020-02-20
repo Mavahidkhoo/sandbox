@@ -1,6 +1,18 @@
 <?php
 require_once 'master.php';
 switch ($_POST['CRUD']) {
+    case 'check':
+        /*
+            @desc   This CRUD use check if user signed in or not
+            @method POST
+        */
+        authenticate();
+        Utils::result(false, array(
+            'userId' => $_SESSION['userId'],
+            'username' => $_SESSION['username'],
+            'displayName' => $_SESSION['name'],
+        ));
+        break;
     case 'sign-up';
         /*
             @desc   This CRUD use for create new account in system
