@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "Iran Bold";
+    src: url("IRAN Sans Bold.ttf");
+    font-family: "Iran regular";
+    src: url("IRAN Sans Regular.ttf");
+}
+
+body {
+    font-size: large;
+    font-family: "Iran regular";
+    direction: rtl;
+    text-align: right;
+}
