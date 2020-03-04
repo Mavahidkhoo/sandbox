@@ -51,26 +51,29 @@ $("#home").ready(function() {
         type: "POST",
         data: dataInput,
         success: function(response) {
-            console.log(response.response.length);
+            // console.log(response.response.length);
 
             if (response.error == false) {
-                for (var i = 0; i < response.response.length; i++) { $("#home").append(`
-                <div class="row">
+                for (var i = 0; i < response.response.length; i++) {
+                    $("#home").append(`
+                <div class="row col-12">
                     <div class="container col-8 mt-5">
                         <hr>
                         <div class="text-info">${response.response[i].title}<br></div>
                         <div class="mr-5">${response.response[i].body}<br></div>
-                        <div style = "position:relative; right:80%;">نویسنده : 
+                        <div class="text-left">نویسنده : 
                         <span class="text-danger">${response.response[i].displayName}</span>
+                        </div>
+                        <div id="edit">
+                        ${response.response[i].postOwner ? '<a href=# class=pl-4> ویرایش </a>   <a href=#> حذف </a>' : ''}
                         </div>
                         <hr>
                     </div>
                 </div> 
-            `); }
-
-
-
+            `);
+                }
             }
+
 
         },
         error: function(xhr, status, error) {
