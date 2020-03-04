@@ -1,9 +1,7 @@
 //jquery Code For Home page(Home/index.html)
 $("#home").ready(function() {
-
     var dataInput = {
         CRUD: "check"
-
     }
     var returned = "";
     var options = {
@@ -13,10 +11,10 @@ $("#home").ready(function() {
         type: "POST",
         data: dataInput,
         success: function(response) {
-            console.log(response.error);
-            console.log(response.response.userId);
-            console.log(response.response.username);
-            console.log(response.response.displayName);
+            // console.log(response.error);
+            // console.log(response.response.userId);
+            // console.log(response.response.username);
+            // console.log(response.response.displayName);
             if (response.error == false) {
                 $("#home").empty();
                 $("#home").append(`<body class="container" id="home">
@@ -32,6 +30,48 @@ $("#home").ready(function() {
             </body>
             `);
             }
+        },
+        error: function(xhr, status, error) {
+            console.log('* ERROR IN BRIDGE REQUEST *');
+            console.log(xhr['responseText']);
+        }
+    };
+    $.ajax(options);
+    return returned;
+})
+
+//-----------------------------------------------------------------------------------
+$("#home").ready(function() {
+    var dataInput = { CRUD: "list" }
+    var returned = "";
+    var options = {
+        url: "../../server/api/post.php",
+        async: false,
+        dataType: "json",
+        type: "POST",
+        data: dataInput,
+        success: function(response) {
+            console.log(response.response.length);
+
+            if (response.error == false) {
+                for (var i = 0; i < response.response.length; i++) { $("#home").append(`
+                <div class="row">
+                    <div class="container col-8 mt-5">
+                        <hr>
+                        <div class="text-info">${response.response[i].title}<br></div>
+                        <div class="mr-5">${response.response[i].body}<br></div>
+                        <div style = "position:relative; right:80%;">نویسنده : 
+                        <span class="text-danger">${response.response[i].displayName}</span>
+                        </div>
+                        <hr>
+                    </div>
+                </div> 
+            `); }
+
+
+
+            }
+
         },
         error: function(xhr, status, error) {
             console.log('* ERROR IN BRIDGE REQUEST *');
