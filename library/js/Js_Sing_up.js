@@ -13,7 +13,9 @@ $("#Sign_up").ready(function() {
              </div> 
              </div> 
              </div>`);
+
     }
+
     $("#buton").click(function(e) {
         var name = $("#name").val();
         var family = $("#family").val();
@@ -40,6 +42,8 @@ $("#Sign_up").ready(function() {
                 if (response.error == false) {
                     var s = "اکانت شما با موفقیت ثبت شد.";
                     modalpage(s);
+                    setTimeout(function() { window.location.href = "http://localhost/sandbox/Pages/Account/index.html"; }, 1000);
+
                 } else {
                     if (dataInput.name == '' || dataInput.family == '') {
                         var s = "فیلد نام و نام خانوادگی را چک کنید.";
@@ -70,6 +74,7 @@ $("#Sign_up").ready(function() {
                 console.log(xhr['responseText']);
             }
         };
+
         $.ajax(options);
         return returned;
 
