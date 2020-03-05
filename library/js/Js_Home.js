@@ -58,9 +58,7 @@ function checkLogin() {
         $("#imgPro").removeClass("d-none");
         $("#userAcc").removeClass("d-none");
         $("#userAcc").html(result.response.displayName);
-        console.log(result.response.profileImage);
         $("#imgPro").attr("src", "../../library/img/" + result.response.profileImage);
-
-
+        $("#editPro").click(function() { window.location.href = '../UserEditProfile/index.html'; })
     }
 };
