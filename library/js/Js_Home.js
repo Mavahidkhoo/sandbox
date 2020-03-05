@@ -1,89 +1,66 @@
 //jquery Code For Home page(Home/index.html)
-$("#home").ready(function() {
-    var dataInput = {
-        CRUD: "check"
-    }
-    var returned = "";
-    var options = {
-        url: "../../server/api/account.php",
-        async: false,
-        dataType: "json",
-        type: "POST",
-        data: dataInput,
-        success: function(response) {
-            // console.log(response.error);
-            // console.log(response.response.userId);
-            // console.log(response.response.username);
-            // console.log(response.response.displayName);
-            if (response.error == false) {
-                $("#home").empty();
-                $("#home").append(`<body class="container" id="home">
-                <div class="row">
-                    <div class="col">
-                        <img src="../../library/img/skeleton.png " alt="عکس نمایه " class="mt-2 " style="width:50px; ">
-                        <span class="mt-4 mr-3 text-muted position-absolute">${response.response.displayName}</span>
+//--------------------------------------------------------------------After Login
+var postEndPoint = '../../server/api/post.php';
+var loginurl = '../../server/api/account.php'
+$(document).ready(function() {
+    showPosts();
+    checkLogin();
+    $('body').on('click', '#exit', function() {
+        var data = {
+            CRUD: 'sign-out'
+        };
+        var result = send('../../server/api/account.php', data);
+        //onsole.log(result);
+        location.reload();
+    });
+});
+
+function showPosts() {
+    var data = {
+        CRUD: 'list'
+    };
+    var result = send(postEndPoint, data);
+    //console.log(result);
+    if (result.error) {
+
+    } else {
+        $.each(result.response, function(index, value) {
+            $('#posts').append(`
+            <div class="row col-12">
+                <div class="container col-8 mt-5">
+                    <hr>
+                    <div class="text-info">${value.title}<br></div>
+                    <div class="mr-5">${value.body}<br></div>
+                    <div class="text-left">نویسنده : 
+                    <span class="text-danger">${value.displayName}</span>
                     </div>
-                    <div class="mt-3 ml-5">
-                        <a href="index.html" class="text-primary">خروج</span>
+                    <div id="edit">
+                    ${value.postOwner ? '<a href=# class=pl-4> ویرایش </a>   <a href=#> حذف </a>' : ''}
                     </div>
+                    <hr>
                 </div>
-            </body>
-            `);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('* ERROR IN BRIDGE REQUEST *');
-            console.log(xhr['responseText']);
-        }
+            </div>
+        `);
+        });
+    }
+}
+
+function checkLogin() {
+    var data = {
+        CRUD: 'check'
     };
-    $.ajax(options);
-    return returned;
-})
-
-//-----------------------------------------------------------------------------------
-$("#home").ready(function() {
-    var dataInput = { CRUD: "list" }
-    var returned = "";
-    var options = {
-        url: "../../server/api/post.php",
-        async: false,
-        dataType: "json",
-        type: "POST",
-        data: dataInput,
-        success: function(response) {
-            // console.log(response.response.length);
-
-            if (response.error == false) {
-                for (var i = 0; i < response.response.length; i++) {
-                    $("#home").append(`
-                <div class="row col-12">
-                    <div class="container col-8 mt-5">
-                        <hr>
-                        <div class="text-info">${response.response[i].title}<br></div>
-                        <div class="mr-5">${response.response[i].body}<br></div>
-                        <div class="text-left">نویسنده : 
-                        <span class="text-danger">${response.response[i].displayName}</span>
-                        </div>
-                        <div id="edit">
-                        ${response.response[i].postOwner ? '<a href=# class=pl-4> ویرایش </a>   <a href=#> حذف </a>' : ''}
-                        </div>
-                        <hr>
-                    </div>
-                </div> 
-            `);
-                }
-            }
+    var result = send(loginurl, data);
+    console.log(result);
+    if (!result.error) {
+        $("#exit").removeClass("d-none");
+        $("#Enter").addClass("d-none");
+        $("#addAcc").addClass("d-none");
+        $("#imgPro").removeClass("d-none");
+        $("#userAcc").removeClass("d-none");
+        $("#userAcc").html(result.response.displayName);
+        console.log(result.response.profileImage);
+        $("#imgPro").attr("src", "../../library/img/" + result.response.profileImage);
 
 
-        },
-        error: function(xhr, status, error) {
-            console.log('* ERROR IN BRIDGE REQUEST *');
-            console.log(xhr['responseText']);
-        }
-    };
-    $.ajax(options);
-    return returned;
-
-
-
-})
+    }
+};

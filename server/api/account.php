@@ -11,6 +11,7 @@ switch ($_POST['CRUD']) {
             'userId' => $_SESSION['userId'],
             'username' => $_SESSION['username'],
             'displayName' => $_SESSION['name'],
+            'profileImage' => $_SESSION['profileImage'],
         ));
         break;
     case 'sign-up';
@@ -103,7 +104,8 @@ switch ($_POST['CRUD']) {
             array(
                 'id',
                 " CONCAT(name, ' ', family) AS name ",
-                'password'
+                'password',
+                'profileImage'
             ),
             " username = '" . $_POST['username'] . "'"
         );
@@ -116,6 +118,7 @@ switch ($_POST['CRUD']) {
                 $_SESSION['userId'] = $select['id'];
                 $_SESSION['username'] = $_POST['username'];
                 $_SESSION['name'] = $select['name'];
+                $_SESSION['profileImage'] = $select['profileImage'];
 
                 Utils::result(false, array(
                     'message' => 'Signed in successfully',
