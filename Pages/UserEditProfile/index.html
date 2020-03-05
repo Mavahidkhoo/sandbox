@@ -24,25 +24,17 @@
     </div>
 
     <div class="container py-3 text-center">
-        <h4>مشخصات</h4>
+        <h4 class="mb-5">مشخصات</h4>
         <div class="row form-group">
-            <div class="col-6">
+            <div class="col-4">
                 <label>نام</label>
-                <input type="text" class="form-control" id="name" placeholder="" required>
-                <div class="invalid-feedback">
-                    لطفا نام را وارد کنید
-                </div>
+                <input type="text" class="form-control" id="name" required>
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <label>نام خانوادگی</label>
-                <input type="text" class="form-control" id="family" placeholder="" required>
-                <div class="invalid-feedback">
-                    لطفا نام خانوادگی را وارد کنید
-                </div>
+                <input type="text" class="form-control" id="family" required>
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-6">
+            <div class="col-4">
                 <label>نام کاربری</label>
                 <div class="input-group">
                     <div class="input-group-append">
@@ -51,6 +43,19 @@
                         </span>
                     </div>
                     <input type="text" class="form-control rounded" id="username" placeholder="" required>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-6">
+                <label>بیوگرافی</label>
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text bg-transparent">
+                            <img src="../../library/css/img/bio.png" style="width: 16px; height: 16px;" />
+                        </span>
+                    </div>
+                    <input type="text" class="form-control rounded" id="bio" placeholder="" required>
                 </div>
             </div>
             <div class="col-6">
@@ -108,7 +113,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-outline btn-outline-info">ذخیره اطلاعات</button>
+        <button type="button" class="btn btn-outline btn-outline-info" id="save">ذخیره اطلاعات</button>
 
     </div>
     </div>
@@ -119,6 +124,6 @@
 <script src=" ..\..\library\js\bridg.js "></script>
 <script src="..\..\library\js\jquery.min.js "></script>
 <script src="..\..\library\js\bootstrap.min.js "></script>
-<script src="..\..\library\js\Js_Home.js "></script>
+<script src="..\..\library\js\js_EditProfile.js "></script>
 
 </html>

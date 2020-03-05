@@ -1,7 +1,7 @@
 //jquery Code For Home page(Home/index.html)
 //--------------------------------------------------------------------After Login
 var postEndPoint = '../../server/api/post.php';
-var loginurl = '../../server/api/account.php'
+var loginurl = '../../server/api/account.php';
 $(document).ready(function() {
     showPosts();
     checkLogin();
