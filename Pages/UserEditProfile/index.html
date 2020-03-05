@@ -4,11 +4,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
+
+    <link rel="stylesheet" href="..\..\library\css\bootstrap.min.css">
+    <link rel="stylesheet" href="..\..\library\css\style-account.css">
+    <title>Edit Profile</title>
 </head>
 
 <body>
+    <div class=" text-center">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../Home/index.html">خانه</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <img src="" width="5%" class="img rounded-circle d-none" alt="..." id="imgPro">
+                    <none class="mr-3 d-none" id="userAcc"></none>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container py-3 text-center">
+        <h4>مشخصات</h4>
+        <div class="row form-group">
+            <div class="col-6">
+                <label>نام</label>
+                <input type="text" class="form-control" id="name" placeholder="" required>
+                <div class="invalid-feedback">
+                    لطفا نام را وارد کنید
+                </div>
+            </div>
+            <div class="col-6">
+                <label>نام خانوادگی</label>
+                <input type="text" class="form-control" id="family" placeholder="" required>
+                <div class="invalid-feedback">
+                    لطفا نام خانوادگی را وارد کنید
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-6">
+                <label>نام کاربری</label>
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text bg-transparent">
+                            <img src="../../library/css/img/user.png" style="width: 16px; height: 16px;" />
+                        </span>
+                    </div>
+                    <input type="text" class="form-control rounded" id="username" placeholder="" required>
+                </div>
+            </div>
+            <div class="col-6">
+                <label>عکس نمایه</label>
+                <div class="input-group">
+                    <input type="file" class="form-control" id="profileImage">
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-6">
+                <label>Linkdin</label>
+                <div class="input-group">
+                    <div class="input-group-append bg-transparent">
+                        <span class="input-group-text bg-transparent">
+                            <img src="../../library/css/img/linkedin.png" style="width: 16px; height: 16px;" />
+                         </span>
+                    </div>
+                    <input type="text" class="form-control rounded" id="linkedIn" placeholder="">
+                </div>
+            </div>
+            <div class="col-6">
+                <label>Instagram</label>
+                <div class="input-group">
+                    <div class="input-group-append bg-transparent">
+                        <span class="input-group-text bg-transparent">
+                            <img src="../../library/css/img/instagram.png" style="width: 16px; height: 16px;" />
+                        </span>
+                    </div>
+                    <input type="text" class="form-control rounded" id="instagram" placeholder="">
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-6">
+                <label>Telegram</label>
+                <div class="input-group">
+                    <div class="input-group-append bg-transparent">
+                        <span class="input-group-text bg-transparent">
+                            <img class="img rounded" src="../../library/css/img/telegram.png" style="width: 16px; height: 16px;" />
+                        </span>
+                    </div>
+                    <input type="text" class="form-control rounded" id="telegram" placeholder="">
+                </div>
+            </div>
+            <div class="col-6">
+                <label>GitHub</label>
+                <div class="input-group">
+                    <div class="input-group-append bg-transparent">
+                        <span class="input-group-text bg-transparent">
+                            <img src="../../library/css/img/github.png" style="width: 16px; height: 16px;" />
+                        </span>
+                    </div>
+                    <input type="text" class="form-control rounded" id="github">
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-outline btn-outline-info">ذخیره اطلاعات</button>
+
+    </div>
+    </div>
+    </div>
 
 </body>
+
+<script src=" ..\..\library\js\bridg.js "></script>
+<script src="..\..\library\js\jquery.min.js "></script>
+<script src="..\..\library\js\bootstrap.min.js "></script>
+<script src="..\..\library\js\Js_Home.js "></script>
 
 </html>
