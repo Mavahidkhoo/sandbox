@@ -4,7 +4,6 @@ var loginurl = '../../server/api/account.php';
 var changepasswordurl = '../../server/api/account.php';
 $(document).ready(function() {
     userInformation();
-    editProfile();
     checkLogin();
     changepassword();
     var name;
@@ -15,6 +14,7 @@ $(document).ready(function() {
     var instagram;
     var telegram;
     var github;
+
     $("#save").click(function() {
         name = $("#name").val();
         family = $("#family").val();
@@ -24,6 +24,21 @@ $(document).ready(function() {
         instagram = $("#instagram").val();
         telegram = $("#telegram").val();
         github = $("#github").val();
+        var data = {
+            CRUD: 'edit-profile',
+            name: name,
+            family: family,
+            username: username,
+            bio: bio,
+            linkedIn: linkedIn,
+            instagram: instagram,
+            telegram: telegram,
+            github: github
+        };
+        var result = send(editProfileurl, data);
+        console.log(result)
+
+
 
 
     });
@@ -57,12 +72,7 @@ function userInformation() {
 
 };
 
-function editProfile() {
-    var data = {
-        CRUD: 'edit-profile'
-    };
-    var result = send(editProfileurl, data);
-};
+
 
 function changepassword() {
     var data = {
@@ -78,4 +88,5 @@ function checkLogin() {
     };
     var result = send(loginurl, data);
     $("#username").val(result.response.username);
+    console.log(result.response.username)
 };
