@@ -103,6 +103,23 @@ switch ($_POST['CRUD']) {
             'message' => 'Server error'
         ));
         break;
+    case 'get':
+        if(!isset($_POST['postId'])){
+            Utils::result(true, array(
+                'message' => 'Missing post parameters'
+            ));
+        }
+
+        $select = $operation->select('posts', array(
+            'title',
+            'body'
+        ), 'id = ' . $_POST['postId']);
+
+        Utils::result(
+            $select == 'rowCountFalse',
+            $select == 'rowCountFalse' ? array('message'=> 'Server error') : $select
+        );
+    break;
     case 'update':
         /*
             @desc   This CRUD use for update the post that specified by postId, if belong to current user
