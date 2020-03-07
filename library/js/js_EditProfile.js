@@ -6,7 +6,6 @@ var profileImage = '';
 $(document).ready(function() {
     userInformation();
     checkLogin();
-    changepassword();
     var name;
     var family;
     var username;
@@ -15,6 +14,9 @@ $(document).ready(function() {
     var instagram;
     var telegram;
     var github;
+    var password;
+    var newPassword;
+    var password2;
 
     $("#save").click(function() {
 
@@ -42,9 +44,53 @@ $(document).ready(function() {
         };
         // console.log(data);
         var result = send(editProfileurl, data);
-        console.log(result)
+        // console.log(result)
     });
-    $("#PassChange").click(function() {})
+    $("#PassChange").click(function() {
+        password = $("#oldPass").val();
+        newPassword = $("#newPass").val();
+        password2 = $("#confPass").val();
+
+        var data = {
+            CRUD: 'change-password',
+            password: password,
+            newPassword: newPassword,
+            password2: password2
+
+        };
+
+        var result = send(changepasswordurl, data);
+        //        console.log(result.response)
+        if (result.response.message == 'Incorrect password') {
+            alert("گذرواژه فعلی صحیح نیست.");
+        }
+        if (newPassword != password2) {
+            alert("گذرواژه جدید با تایید گذرواژه مطابقت ندارد");
+        }
+        if (result.response.message == "Password must between 6 and 20 characters") {
+            alert("گذرواژه باید بین 6 تا 20 حرف باشد.");
+
+        }
+        if (result.response.message == "Password changed successfully") {
+            $("#modalsabt").append(`<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> تغییر گذرواژه</h4>
+                </div>
+                <div class="modal-body">
+             <p id='p'>گذرواژه تغییر کرد.</p> 
+             </div> 
+             </div> 
+             </div> 
+             </div>`);
+            setTimeout(function() { window.location.href = "http://localhost/sandbox/Pages/UserEditProfile/index.html"; }, 1000);
+
+        }
+
+
+
+    })
 });
 
 function userInformation() {
@@ -65,14 +111,6 @@ function userInformation() {
     $("#telegram").val(result.response.telegram);
     $("#github").val(result.response.github);
 
-};
-
-function changepassword() {
-    var data = {
-        CRUD: 'change-password'
-    };
-    var result = send(editProfileurl, data);
-    // console.log(result);
 };
 
 function checkLogin() {
