@@ -52,3 +52,13 @@ body {
     border-bottom-left-radius: 25px;
     border-top-right-radius: 35px;
 }
+
+.box {
+    cursor: default;
+    width: 70%;
+    right: 15%;
+    background-color: #ccc;
+    box-shadow: 0px 3px 5px 0px #ccc;
+    margin-top: 35px;
+    border-radius: 15px;
+}

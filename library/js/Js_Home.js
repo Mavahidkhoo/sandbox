@@ -2,6 +2,8 @@
 //--------------------------------------------------------------------After Login
 var postEndPoint = '../../server/api/post.php';
 var loginurl = '../../server/api/account.php';
+var modal = document.getElementById('myModal');
+var postid;
 $(document).ready(function() {
     showPosts();
     checkLogin();
@@ -13,6 +15,20 @@ $(document).ready(function() {
         //onsole.log(result);
         location.reload();
     });
+    $('body').on('click', '.action-delete', function() {
+        modal.style.display = 'block';
+        postid = $(this).attr('postid');
+    });
+    $('body').on('click', '#no', function() {
+        modal.style.display = 'none';
+    });
+    $('body').on('click', '#yes', function() {
+        Deletepost(postid);
+        location.reload();
+    });
+
+
+
 });
 
 function showPosts() {
@@ -20,13 +36,13 @@ function showPosts() {
         CRUD: 'list'
     };
     var result = send(postEndPoint, data);
-    //console.log(result);
     if (result.error) {
 
     } else {
         $.each(result.response, function(index, value) {
+
                     $('#posts').append(`
-            <div class="row col-12">
+            <div class="row col-12 box">
                 <div class="container col-8 mt-5">
                     <hr>
                     <div class="text-info">${value.title}<br></div>
@@ -35,7 +51,8 @@ function showPosts() {
                     <span class="text-danger">${value.displayName}</span>
                     </div>
                     <div id="edit">
-                    ${value.postOwner ? `<a href=../post/index2.html?postid=${value.id} class=pl-4 '> ویرایش </a>   <a href=#> حذف </a>` : ''}
+                    ${value.postOwner ? `<a style='text-decoration:none' href=../post/index2.html?postid=${value.id} class=pl-4 '> ویرایش </a>   
+                    <a class='text-primary action-delete' postid=${value.id} style='cursor: pointer;'> حذف </a>` : ''}
                     </div>
                     <hr>
                 </div>
@@ -50,7 +67,7 @@ function checkLogin() {
         CRUD: 'check'
     };
     var result = send(loginurl, data);
-    console.log(result);
+    //console.log(result);
     if (!result.error) {
         $("#exit").removeClass("d-none");
         $("#Enter").addClass("d-none");
@@ -64,4 +81,14 @@ function checkLogin() {
         $("#editPro").click(function() { window.location.href = '../UserEditProfile/index.html'; })
         $("#creatPost").click(function() { window.location.href = '../post/index.html'; })
     }
+};
+function Deletepost(postid) {
+    var data = {
+        CRUD: 'delete',
+        postId:postid
+    };
+    var result = send(postEndPoint, data);
+    console.log(postid);
+    console.log(result);
+    
 };
