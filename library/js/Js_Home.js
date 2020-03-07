@@ -25,7 +25,7 @@ function showPosts() {
 
     } else {
         $.each(result.response, function(index, value) {
-            $('#posts').append(`
+                    $('#posts').append(`
             <div class="row col-12">
                 <div class="container col-8 mt-5">
                     <hr>
@@ -35,7 +35,7 @@ function showPosts() {
                     <span class="text-danger">${value.displayName}</span>
                     </div>
                     <div id="edit">
-                    ${value.postOwner ? '<a href=# class=pl-4> ویرایش </a>   <a href=#> حذف </a>' : ''}
+                    ${value.postOwner ? `<a href=../post/index2.html?postid=${value.id} class=pl-4 '> ویرایش </a>   <a href=#> حذف </a>` : ''}
                     </div>
                     <hr>
                 </div>
