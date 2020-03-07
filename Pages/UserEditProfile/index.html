@@ -64,7 +64,8 @@
             <div class="col-6">
                 <label>عکس نمایه</label>
                 <div class="input-group">
-                    <input type="file" class="form-control" id="profileImage">
+                    <input type="file" class="form-control" id="profileImage" onchange="encodeImagetoBase64(this)">
+                    <a href="" id="convertImg"></a>
                 </div>
             </div>
         </div>

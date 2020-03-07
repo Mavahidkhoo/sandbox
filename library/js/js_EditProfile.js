@@ -2,6 +2,7 @@ var editProfileurl = '../../server/api/account.php';
 var userInformationurl = '../../server/api/account.php';
 var loginurl = '../../server/api/account.php';
 var changepasswordurl = '../../server/api/account.php';
+var profileImage = '';
 $(document).ready(function() {
     userInformation();
     checkLogin();
@@ -16,9 +17,11 @@ $(document).ready(function() {
     var github;
 
     $("#save").click(function() {
+
         name = $("#name").val();
         family = $("#family").val();
         username = $("#username").val();
+        //profileImage
         bio = $("#bio").val();
         linkedIn = $("#linkedIn").val();
         instagram = $("#instagram").val();
@@ -29,24 +32,19 @@ $(document).ready(function() {
             name: name,
             family: family,
             username: username,
+            profileImage: profileImage,
             bio: bio,
-            linkedIn: linkedIn,
+            linkedin: linkedIn,
             instagram: instagram,
             telegram: telegram,
             github: github
+
         };
+        // console.log(data);
         var result = send(editProfileurl, data);
         console.log(result)
-
-
-
-
     });
-    $("#PassChange").click(function() {
-
-
-    })
-
+    $("#PassChange").click(function() {})
 });
 
 function userInformation() {
@@ -59,11 +57,8 @@ function userInformation() {
     $("#userAcc").removeClass("d-none");
     $("#userAcc").html(result.response.name);
     $("#imgPro").attr("src", "../../library/img/" + result.response.profileImage);
-    var name2 = (result.response.name).split(' ');
-    name = name2[0];
-    family = name2[1];
-    $("#name").val(name2[0]);
-    $("#family").val(name2[1]);
+    $("#name").val(result.response.name);
+    $("#family").val(result.response.family);
     $("#bio").val(result.response.bio);
     $("#linkedIn").val(result.response.linkedIn);
     $("#instagram").val(result.response.instagram);
@@ -71,8 +66,6 @@ function userInformation() {
     $("#github").val(result.response.github);
 
 };
-
-
 
 function changepassword() {
     var data = {
@@ -88,5 +81,21 @@ function checkLogin() {
     };
     var result = send(loginurl, data);
     $("#username").val(result.response.username);
-    console.log(result.response.username)
+    //console.log(result.response.username)
 };
+
+
+function encodeImagetoBase64(element) {
+
+    var file = element.files[0];
+
+    var reader = new FileReader();
+
+    reader.onloadend = function() {
+        profileImage = reader.result;
+        //console.log(profileImage);
+    }
+
+    reader.readAsDataURL(file);
+
+}

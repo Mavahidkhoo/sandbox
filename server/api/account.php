@@ -157,7 +157,8 @@ switch ($_POST['CRUD']) {
         $select = $operation->select(
             'users',
             array(
-                " CONCAT(name, ' ', family) AS name",
+                "name",
+                'family',
                 'profileImage',
                 'bio',
                 'linkedIn',
@@ -196,7 +197,7 @@ switch ($_POST['CRUD']) {
             !isset($_POST['name']) || !isset($_POST['family'])  || !isset($_POST['username'])  || !isset($_POST['profileImage']) || !isset($_POST['bio']) || !isset($_POST['linkedin']) || !isset($_POST['instagram']) || !isset($_POST['telegram']) || !isset($_POST['github'])
         ) {
             Utils::result(true, array(
-                'message' => 'Missing post parameters'
+                'message' => 'Missing post parameters 4545'
             ));
         }
 
