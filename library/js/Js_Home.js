@@ -60,6 +60,8 @@ function checkLogin() {
         $("#userAcc").html(result.response.displayName);
         $("#imgPro").attr("src", "../../library/img/" + result.response.profileImage);
         $("#editPro").removeClass("d-none");
+        $("#creatPost").removeClass("d-none");
         $("#editPro").click(function() { window.location.href = '../UserEditProfile/index.html'; })
+        $("#creatPost").click(function() { window.location.href = '../post/index.html'; })
     }
 };
