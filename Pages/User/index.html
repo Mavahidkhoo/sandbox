@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="..\..\library\css\bootstrap.min.css">
+    <link rel="stylesheet" href="..\..\library\css\style-account.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Users</title>
+</head>
+
+<body class="bg-info">
+    <div class="container">
+        <div class="col-6 split right">
+            <div class="text-center bg-secondary text-white rounded ">
+                <h1 class="mt-2">جست و جوی اعضا</h1>
+            </div>
+            <div class="col-9">
+                <div>
+                    <div class="input-group justify-content-start mt-3">
+                        <div class="input-group-append">
+                            <input class="form-control" id="search" type="text" value="" placeholder="جست و جو">
+                        </div>
+
+                        <span class="input-group-text bg-white">
+                           <span style="cursor:pointer" id="searchbar"><img src="../../library/css/img/search.png" style="height: 16px; width: 16px;"></span>
+                        </span>
+                    </div>
+                    <small class="text-danger mr-5 pr-4 d-none" id="error">کلمه مورد نظر را تایپ کنید</small>
+                    <div class="input-group" id="option">
+                        <label class="ml-2">جست و جو در :</label>
+                        <label class="radio-inline ml-3 mt-1">
+                        <input type="radio" class="ml-1 mt-1" name="optradio" value="multi-column" checked> کامل
+                      </label>
+                        <label class="radio-inline ml-3 mt-1">
+                        <input type="radio" class="ml-1 mt-1" name="optradio" value="username">نام کاربری
+                      </label>
+
+                        <label class="radio-inline mt-1">
+                        <input type="radio" class="ml-1 mt-1" name="optradio" value="name">نام / اسم
+                      </label>
+                    </div>
+                </div>
+            </div>
+            <div id="showUser">
+            </div>
+        </div>
+        <div class="col-6 split left bg-white">
+            <div class="text-center bg-secondary text-white rounded ">
+                <h1 class="mt-2">مشخصات کاربر</h1>
+            </div>
+            <div id="showUser2">
+            </div>
+        </div>
+</body>
+<script src=" ..\..\library\js\bridg.js "></script>
+<script src="..\..\library\js\jquery.min.js "></script>
+<script src="..\..\library\js\bootstrap.min.js "></script>
+<script src="..\..\library\js\Js_userList.js "></script>
+
+</html>

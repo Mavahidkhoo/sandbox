@@ -33,11 +33,13 @@ $("#Sign_up").ready(function() {
                 } else {
                     if (dataInput.name == '') {
                         $("#1name").removeClass("d-none");
+                        return;
                     } else {
                         $("#1name").addClass('d-none');
                     }
                     if (dataInput.family == '') {
                         $("#2family").removeClass("d-none");
+                        return;
                     } else {
                         $("#2family").addClass("d-none");
                     }
@@ -45,24 +47,28 @@ $("#Sign_up").ready(function() {
 
                         $("#3username").html("نام کاربری باید بین 4 تا 40 حرف باشد");
                         $("#3username").removeClass('d-none');
+                        return;
                     } else {
                         $("#3username").addClass("d-none");
                     }
                     if (response.response.message == 'Username exists') {
                         $("#3username").html("این نام کاربری ثبت شده است.");
                         $("#3username").removeClass("d-none");
+                        return;
                     } else {
                         $("#3username").addClass("d-none");
                     }
                     if (dataInput.password == '' || response.response.message == 'Password must between 6 and 20 characters') {
                         $("#4password").html("گذرواژه باید بین 6 تا 20 کاراکتر باشد");
                         $("#4password").removeClass("d-none");
+                        return;
                     } else {
                         $("#4password").addClass("d-none");
                     }
                     if (dataInput.password != dataInput.password2) {
                         $("#5password2").html("تایید گذرواژه درست نمیباشد");
                         $("#5password2").removeClass("d-none");
+                        return;
 
                     } else {
                         $("#5password2").addClass("d-none");

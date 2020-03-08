@@ -62,3 +62,44 @@ body {
     margin-top: 35px;
     border-radius: 15px;
 }
+
+.box2 {
+    cursor: default;
+    width: 60%;
+    height: 50px;
+    right: 15%;
+    background-color: #ccc;
+    box-shadow: 0px 3px 5px 0px #ccc;
+    margin-top: 35px;
+    border-radius: 15px;
+    padding-right: 25px;
+}
+
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+
+.box3 {
+    cursor: default;
+    width: 100%;
+    right: 15%;
+    background-color: #ccc;
+    box-shadow: 0px 3px 5px 0px #ccc;
+    margin-top: 35px;
+    border-radius: 15px;
+    padding-right: 25px;
+}

@@ -123,7 +123,7 @@ function checkLogin() {
     var result = send(loginurl, data);
     $("#username").val(result.response.username);
     //console.log(result.response.username)
-};
+}
 
 
 function encodeImagetoBase64(element) {
