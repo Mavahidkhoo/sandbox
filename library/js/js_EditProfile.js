@@ -3,27 +3,25 @@ var userInformationurl = '../../server/api/account.php';
 var loginurl = '../../server/api/account.php';
 var changepasswordurl = '../../server/api/account.php';
 var profileImage = '';
+var name;
+var family;
+var username;
+var bio;
+var linkedIn;
+var instagram;
+var telegram;
+var github;
+var password;
+var newPassword;
+var password2;
 $(document).ready(function() {
     userInformation();
     checkLogin();
-    var name;
-    var family;
-    var username;
-    var bio;
-    var linkedIn;
-    var instagram;
-    var telegram;
-    var github;
-    var password;
-    var newPassword;
-    var password2;
-
     $("#save").click(function() {
 
         name = $("#name").val();
         family = $("#family").val();
         username = $("#username").val();
-        //profileImage
         bio = $("#bio").val();
         linkedIn = $("#linkedIn").val();
         instagram = $("#instagram").val();
@@ -40,10 +38,16 @@ $(document).ready(function() {
             instagram: instagram,
             telegram: telegram,
             github: github
-
         };
         // console.log(data);
         var result = send(editProfileurl, data);
+        var s = "پروفایل شما با موفقیت ویرایش شد."
+        modalpage(s);
+        setTimeout(function() {
+            location.reload();
+        }, 1000);
+
+
         // console.log(result)
     });
     $("#PassChange").click(function() {
@@ -97,7 +101,6 @@ function userInformation() {
     var data = {
         CRUD: 'get'
     };
-    var profileImage = btoa($("#profileImage").val());
     var result = send(editProfileurl, data);
     $("#imgPro").removeClass("d-none");
     $("#userAcc").removeClass("d-none");
@@ -135,5 +138,21 @@ function encodeImagetoBase64(element) {
     }
 
     reader.readAsDataURL(file);
+
+}
+
+function modalpage(s) {
+    $("#modalsabt").append(`<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">ساخت اکانت</h4>
+            </div>
+            <div class="modal-body">
+         <p id='p'>${s}</p> 
+         </div> 
+         </div> 
+         </div> 
+         </div>`);
 
 }
