@@ -1,7 +1,7 @@
 //jquery Code For Home page(Home/index.html)
 //--------------------------------------------------------------------After Login
-var postEndPoint = '../../server/api/post.php';
-var loginurl = '../../server/api/account.php';
+var postEndPoint = 'server/api/post.php';
+var loginurl = 'server/api/account.php';
 var modal = document.getElementById('myModal');
 var postid;
 $(document).ready(function() {
@@ -11,7 +11,7 @@ $(document).ready(function() {
         var data = {
             CRUD: 'sign-out'
         };
-        var result = send('../../server/api/account.php', data);
+        var result = send('server/api/account.php', data);
         //onsole.log(result);
         location.reload();
     });
@@ -51,7 +51,7 @@ function showPosts() {
                     <span class="text-danger">${value.displayName}</span>
                     </div>
                     <div id="edit">
-                    ${value.postOwner ? `<a style='text-decoration:none' href=../post/index2.html?postid=${value.id} class=pl-4 '> ویرایش </a>   
+                    ${value.postOwner ? `<a style='text-decoration:none' href=Pages/post/index2.html?postid=${value.id} class=pl-4 '> ویرایش </a>   
                     <a class='text-primary action-delete' postid=${value.id} style='cursor: pointer;'> حذف </a>` : ''}
                     </div>
                     <hr>
@@ -75,11 +75,12 @@ function checkLogin() {
         $("#imgPro").removeClass("d-none");
         $("#userAcc").removeClass("d-none");
         $("#userAcc").html(result.response.displayName);
-        $("#imgPro").attr("src", "../../library/img/" + result.response.profileImage);
+        $("#imgPro").attr("src", "library/img/" + result.response.profileImage);
         $("#editPro").removeClass("d-none");
         $("#creatPost").removeClass("d-none");
-        $("#editPro").click(function() { window.location.href = '../UserEditProfile/index.html'; })
-        $("#creatPost").click(function() { window.location.href = '../post/index.html'; })
+        $("#editPro").click(function() { window.location.href = 'Pages/UserEditProfile/index.html'; })
+        $("#creatPost").click(function () { window.location.href = 'Pages/post/index.html'; })
+        $("#searchUser").click(function () { window.location.href = 'Pages/User/index.html';})
     }
 };
 function Deletepost(postid) {

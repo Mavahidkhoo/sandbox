@@ -36,7 +36,7 @@ $("Sing_in").ready(function() {
                 if (response.error == false) {
                     var s = username + "  " + "خوش آمدید.";
                     modalpage(s);
-                    setTimeout(function() { window.location.href = "http://localhost/sandbox/Pages/Home/index.html"; }, 1000);
+                    setTimeout(function() { window.location.href = "http://localhost/sandbox/index.html"; }, 1000);
 
                 } else {
                     if (dataInput.username == '') {

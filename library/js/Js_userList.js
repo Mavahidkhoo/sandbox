@@ -5,12 +5,13 @@ var userid;
 $(document).ready(function() {
     $('body').on('click', '#searchbar', function() {
         $("#showUser").empty();
-        $("#search").val("");
-        $("#search").attr('placeholder', 'جست و جو ');
+        // $("#search").val("");
+        // $("#search").attr('placeholder', 'جست و جو ');
         radioValue = $('input[name=optradio]:checked', '#option').val();
         inputValue = $("#search").val();
         if (inputValue == "") {
             $("#error").removeClass('d-none');
+            return;
         } else { $("#error").addClass('d-none'); }
         if (inputValue.length <= 2) {
             $("#error").html("کلمه مورد نظر کوتاه است");
@@ -69,15 +70,18 @@ function get() {
         userId: userid
     };
     var result = send(listurl, data);
-    console.log(result.response);
+    console.log(result.response.profileImage);
     $('#showUser2').append(`
         <div class=box3>
-       نام : ${result.response.name}<br>
-      بیوگرافی :  ${result.response.bio}<br>
-    لینکدن :    ${result.response.linkedIn}<br>
-    اینستاگرام :    ${result.response.instagram}<br>
-     تلگرام :   ${result.response.telegram}<br>
-     گیت هاب :   ${result.response.github }<br>
+        
+       نام : ${result.response.name ? result.response.name : null}<br>
+      بیوگرافی :${result.response.bio ? result.response.bio : ""}  <br>
+      <img class='float-left rounded rounded-circle' alt="Deleted Image" src=../../library/img/${result.response.profileImage} style=" height: 100px; width: 100px;">
+     لینکدن :${result.response.linkedIn ? result.response.linkedIn : ""}<br>
+    اینستاگرام : ${result.response.instagram ?result.response.instagram:"" }<br>
+     تلگرام :${result.response.telegram ? result.response.telegram:""}<br>
+     گیت هاب :${result.response.github ? result.response.github : ""}<br>
+     
         </div>
 `);
 

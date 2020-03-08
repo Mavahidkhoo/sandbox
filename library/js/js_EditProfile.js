@@ -46,7 +46,7 @@ $(document).ready(function() {
         setTimeout(function() {
             location.reload();
         }, 1000);
-
+        setTimeout(function() { window.location.href = "http://localhost/sandbox/index.html" }, 2000);
 
         // console.log(result)
     });
