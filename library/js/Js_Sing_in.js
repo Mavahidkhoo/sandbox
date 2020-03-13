@@ -50,7 +50,7 @@ function signIN() {
         $("#passError").addClass("d-none");
         var s = username + "  " + "خوش آمدید.";
         modalpage(s);
-        // setTimeout(function() { window.location.href = "../../index.html"; }, 1000);
+        setTimeout(function() { window.location.href = "../../index.html"; }, 1000);
 
     } else {
         if (username == '') {

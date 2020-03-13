@@ -7,7 +7,6 @@ $(document).ready(function() {
     //console.log(postId);
     $("#EditPost").click(function() {
         update();
-
         $("#modalsabt").append(`<div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -48,6 +47,20 @@ function update() {
         body: $('#PostText').val()
     };
     var result = send(url, data);
+
+    if (title == '') {
+        $("#titleError").html("موضوع  خود را تایپ کنید");
+        $("#titleError").removeClass('d-none');
+        return;
+    } else { $("#titleError").addClass('d-none'); }
+    if (body == '') {
+        $("#bodyError").html("متن خود را تایپ کنید.");
+        $("#bodyError").removeClass("d-none");
+        return;
+    } else { $("#bodyError").addClass("d-none"); }
+
+
+
     console.log(result.response);
 }
 
