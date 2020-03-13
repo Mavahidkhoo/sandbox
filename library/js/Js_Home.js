@@ -5,6 +5,7 @@ var loginurl = 'server/api/account.php';
 var modal = document.getElementById('myModal');
 var postid;
 $(document).ready(function() {
+    $("#searchUser").click(function() { window.location.href = 'Pages/User/index.html'; })
     showPosts();
     checkLogin();
     $('body').on('click', '#exit', function() {
@@ -67,7 +68,7 @@ function checkLogin() {
         CRUD: 'check'
     };
     var result = send(loginurl, data);
-    //console.log(result);
+    console.log(result);
     if (!result.error) {
         $("#exit").removeClass("d-none");
         $("#Enter").addClass("d-none");

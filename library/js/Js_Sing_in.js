@@ -1,72 +1,82 @@
 //jquery Code For Sign_in page(account/index.html)
+var url = "../../server/api/account.php";
+var username = '';
+var password = '';
 $("Sing_in").ready(function() {
-    function modalpage(s) {
-        $("#modalsabt").append(`<div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">ساخت اکانت</h4>
-                </div>
-                <div class="modal-body">
-             <p id='p'>${s}</p> 
-             </div> 
-             </div> 
-             </div> 
-             </div>`);
+    $("#buton").click(function() {
+        signIN();
+    });
+    $("#username").keypress(function(e) {
+        if (e.keyCode === 13) {
+            $("#buton").click();
+            return;
+        }
+    });
+    $("#Password").keypress(function(event) {
+        if (event.keyCode === 13) {
+            $("#buton").click();
+        }
+    });
+})
+
+function modalpage(e) {
+    $("#modalsabt").append(`<div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">ورود</h4>
+                    </div>
+                    <div class="modal-body">
+                 <p id='p'>${e}</p> 
+                 </div> 
+                 </div> 
+                 </div> 
+                 </div>`);
+}
+
+function signIN() {
+    username = $("#username").val();
+    password = $("#Password").val();
+    var data = {
+        CRUD: "sign-in",
+        username: username,
+        password: password
+    };
+    var result = send(url, data)
+    console.log(result.response.message);
+
+    if (result.error == false) {
+        $("#userError").addClass('d-none');
+        $("#passError").addClass("d-none");
+        var s = username + "  " + "خوش آمدید.";
+        modalpage(s);
+        // setTimeout(function() { window.location.href = "../../index.html"; }, 1000);
+
+    } else {
+        if (username == '') {
+            $("#userError").html("فیلد نام کاربری را چک کنید");
+            $("#userError").removeClass('d-none');
+            return;
+        } else { $("#userError").addClass('d-none'); }
+        if (password == '') {
+            $("#passError").html("فیلد گذرواژه را چک کنید ");
+            $("#passError").removeClass("d-none");
+            return;
+        } else { $("#passError").addClass("d-none") }
+
+        if (result.response.message == "Incorrect username or password") {
+            $("#passError").html("نام کاربری / گذرواژه اشتباه است.");
+            $("#userError").html("نام کاربری / گذرواژه اشتباه است.");
+            $("#userError").removeClass('d-none');
+            $("#passError").removeClass("d-none");
+            return;
+
+        } else {
+            $("#userError").addClass('d-none');
+            $("#passError").addClass("d-none");
+        }
+
 
     }
-    $("#buton").click(function(e) {
-        var username = $("#username").val();
-        var password = $("#Password").val();
-        var dataInput = {
-            CRUD: "sign-in",
-            username: username,
-            password: password
-        }
-        var returned = "";
-        var options = {
-            url: "../../server/api/account.php",
-            async: false,
-            dataType: "json",
-            type: "POST",
-            data: dataInput,
-            success: function(response) {
-                console.log(response.response.message);
-                console.log(dataInput);
-                if (response.error == false) {
-                    var s = username + "  " + "خوش آمدید.";
-                    modalpage(s);
-                    setTimeout(function() { window.location.href = "http://localhost/sandbox/index.html"; }, 1000);
 
-                } else {
-                    if (dataInput.username == '') {
-                        var s = "فیلد نام کاربری را چک کنید";
-                        modalpage(s);
-                    }
-                    if (dataInput.password == '') {
-
-                        var s = "فیلد گذرواژه را چک کنید.";
-                        modalpage(s);
-                    }
-                    if (response.response.message == "Incorrect username or password") {
-                        var s = "نام کاربری / گذرواژه اشتباه است.";
-                        modalpage(s);
-
-                    }
-
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('* ERROR IN BRIDGE REQUEST *');
-                console.log(xhr['responseText']);
-            }
-        };
-
-        $.ajax(options);
-        return returned;
-
-
-
-
-    });
-});
+}
