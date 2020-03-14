@@ -1,8 +1,10 @@
 var listurl = '../../server/api/user.php';
+var loginurl = '../../server/api/account.php';
 var radioValue;
 var inputValue;
 var userid;
 $(document).ready(function() {
+    checkLogin()
     $('body').on('click', '#searchbar', function() {
         $("#showUser").empty();
         // $("#search").val("");
@@ -22,6 +24,8 @@ $(document).ready(function() {
     $('body').on('click', '.box2', function() {
         userid = $(this).attr('id');
         get();
+
+
 
     })
     userList();
@@ -47,7 +51,6 @@ function userList() {
                 </br>${value.username}
                 </div>
     `);
-            console.log(value.id)
         });
     }
     if (result.error == true) {
@@ -70,19 +73,27 @@ function get() {
         userId: userid
     };
     var result = send(listurl, data);
-    console.log(result.response.profileImage);
+    //console.log(result.response.profileImage);
     $('#showUser2').append(`
         <div class=box3>
-        
-       نام : ${result.response.name ? result.response.name : null}<br>
-      بیوگرافی :${result.response.bio ? result.response.bio : ""}  <br>
-      <img class='float-left rounded rounded-circle' alt="Deleted Image" src=../../library/img/${result.response.profileImage} style=" height: 100px; width: 100px;">
-     لینکدن :${result.response.linkedIn ? result.response.linkedIn : ""}<br>
-    اینستاگرام : ${result.response.instagram ?result.response.instagram:"" }<br>
-     تلگرام :${result.response.telegram ? result.response.telegram:""}<br>
-     گیت هاب :${result.response.github ? result.response.github : ""}<br>
-     
+            نام : ${result.response.name ? result.response.name : null}<br>
+            بیوگرافی :${result.response.bio ? result.response.bio : ""}  <br>
+            <img class='float-left rounded rounded-circle' alt="Deleted Image" src=../../library/img/${result.response.profileImage} style=" height: 100px; width: 100px;">
+            لینکدن :${result.response.linkedIn ? result.response.linkedIn : ""}<br>
+            اینستاگرام : ${result.response.instagram ?result.response.instagram:"" }<br>
+            تلگرام :${result.response.telegram ? result.response.telegram:""}<br>
+            گیت هاب :${result.response.github ? result.response.github : ""}<br>
         </div>
 `);
 
+}
+
+function checkLogin() {
+    var data = {
+        CRUD: 'check'
+    };
+    var result = send(loginurl, data);
+    $("#username").html(result.response.username);
+    $("#imgPro").attr("src", "../../library/img/" + result.response.profileImage);
+    console.log(result.response.profileImage)
 }
