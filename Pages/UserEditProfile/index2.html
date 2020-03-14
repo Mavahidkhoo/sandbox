@@ -10,21 +10,38 @@
 </head>
 
 <body>
-    <div class="container py-3 text-center" id="pass">
-        <h4 class="mb-5">تغییر گذرواژه</h4>
-        <div class="row form-group text-center justify-content-center">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <img src="" width="5%" class="img rounded-circle d-none" alt="..." id="imgPro">
+                    <none class="mr-3 d-none" id="userAcc"></none>
+                </ul>
+            </div>
+            <div>
+                <a href="index.html" class="btn btn-outline btn-outline-danger"> ویرایش پروفایل</a>
+            </div>
+        </nav>
+    </div>
+    <div class="container py-3" id="pass">
+        <h1 class="mb-5 text-center bg-dark text-white rounded">تغییر گذرواژه</h1>
+        <div class="row form-group  justify-content-center">
             <div class="col-8">
                 <label> گذرواژه فعلی</label>
-                <div class="form-group pass_show">
-                    <input type="password" class="form-control" placeholder="گذرواژه فعلی" id="oldPass">
+                <div class="form-group ">
+                    <input type="password" class="form-control text-center" placeholder="گذرواژه فعلی" id="oldPass" autofocus>
+                    <small id="passError" class=" text-danger text-right mr-4 d-none">asd</small>
                 </div>
                 <label>گذرواژه جدید</label>
                 <div class="form-group pass_show">
-                    <input type="password" class="form-control" placeholder="گذرواژه جدید" id="newPass">
+                    <input type="password" class="form-control text-center" placeholder="گذرواژه جدید" id="newPass">
+                    <small id="newPassError" class=" text-danger text-right mr-4 d-none">asd</small>
                 </div>
+
                 <label>تایید گذرواژه</label>
                 <div class="form-group pass_show">
-                    <input type="password" class="form-control" placeholder="تایید گذرواژه" id="confPass">
+                    <input type="password" class="form-control text-center" placeholder="تایید گذرواژه" id="confPass">
+                    <small id="confirmError" class=" text-danger text-right mr-4 d-none">asd</small>
                 </div>
                 <button class="btn btn-success float-left" id="PassChange" data-toggle="modal" data-target="#myModal">ذخیره</button>
                 <div id="modalsabt"></div>

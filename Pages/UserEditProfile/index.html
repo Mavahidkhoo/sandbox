@@ -11,9 +11,9 @@
 </head>
 
 <body>
-    <div class=" text-center">
+    <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="http://localhost/sandbox/index.html">خانه</a>
+            <a class="navbar-brand" href="../../index.html">خانه</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <img src="" width="5%" class="img rounded-circle d-none" alt="..." id="imgPro">
@@ -26,16 +26,18 @@
         </nav>
     </div>
 
-    <div class="container py-3 text-center">
-        <h4 class="mb-5">مشخصات</h4>
+    <div class="container py-3">
+        <h1 class="mb-5 rounded border border-danger bg-dark text-white text-center">مشخصات</h1>
         <div class="row form-group">
             <div class="col-4">
                 <label>نام</label>
-                <input type="text" class="form-control" id="name" required>
+                <input type="text" class="form-control text-center" id="name">
+                <small id="nameError" class=" text-danger d-none">asd</small>
             </div>
             <div class="col-4">
                 <label>نام خانوادگی</label>
-                <input type="text" class="form-control" id="family" required>
+                <input type="text" class="form-control text-center" id="family">
+                <small id="familyError" class=" text-danger d-none">sad</small>
             </div>
             <div class="col-4">
                 <label>نام کاربری</label>
@@ -45,8 +47,10 @@
                             <img src="../../library/css/img/user.png" style="width: 16px; height: 16px;" />
                         </span>
                     </div>
-                    <input type="text" class="form-control rounded" id="username" placeholder="" required>
+                    <input type="text" class="form-control rounded text-center" id="username" placeholder="">
+
                 </div>
+                <small id="usernameError" class=" text-danger d-none">asd</small>
             </div>
         </div>
         <div class="row form-group">
@@ -58,15 +62,18 @@
                             <img src="../../library/css/img/bio.png" style="width: 16px; height: 16px;" />
                         </span>
                     </div>
-                    <input type="text" class="form-control rounded" id="bio" placeholder="" required>
+                    <input type="text" class="form-control rounded text-center" id="bio" placeholder="" autofocus>
+
                 </div>
+                <small id="bioError" class=" text-danger d-none">asd</small>
             </div>
             <div class="col-6">
                 <label>عکس نمایه</label>
                 <div class="input-group">
-                    <input type="file" class="form-control" id="profileImage" onchange="encodeImagetoBase64(this)">
+                    <input type="file" class="form-control text-center" id="profileImage" onchange="encodeImagetoBase64(this)">
                 </div>
             </div>
+
         </div>
         <div class="row form-group">
             <div class="col-6">
@@ -77,8 +84,9 @@
                             <img src="../../library/css/img/linkedin.png" style="width: 16px; height: 16px;" />
                          </span>
                     </div>
-                    <input type="text" class="form-control rounded" id="linkedIn" placeholder="">
+                    <input type="text" class="form-control rounded text-center" id="linkedIn" placeholder="">
                 </div>
+                <small id="linkedInError" class=" text-danger d-none">asd</small>
             </div>
             <div class="col-6">
                 <label>Instagram</label>
@@ -88,8 +96,9 @@
                             <img src="../../library/css/img/instagram.png" style="width: 16px; height: 16px;" />
                         </span>
                     </div>
-                    <input type="text" class="form-control rounded" id="instagram" placeholder="">
+                    <input type="text" class="form-control rounded text-center" id="instagram" placeholder="">
                 </div>
+                <small id="instagramError" class=" text-danger d-none">asd</small>
             </div>
         </div>
         <div class="row form-group">
@@ -101,8 +110,9 @@
                             <img class="img rounded" src="../../library/css/img/telegram.png" style="width: 16px; height: 16px;" />
                         </span>
                     </div>
-                    <input type="text" class="form-control rounded" id="telegram" placeholder="">
+                    <input type="text" class="form-control rounded text-center" id="telegram" placeholder="">
                 </div>
+                <small id="telegramError" class=" text-danger d-none">asd</small>
             </div>
             <div class="col-6">
                 <label>GitHub</label>
@@ -112,11 +122,15 @@
                             <img src="../../library/css/img/github.png" style="width: 16px; height: 16px;" />
                         </span>
                     </div>
-                    <input type="text" class="form-control rounded" id="github">
+                    <input type="text" class="form-control rounded text-center" id="github">
                 </div>
+                <small id="githubError" class=" text-danger d-none">asd</small>
             </div>
         </div>
-        <button type="button" class="btn btn-outline btn-outline-info" id="save" data-toggle="modal" data-target="#myModal">ذخیره اطلاعات</button>
+        <div class="text-center">
+            <button type="button" class="btn btn-outline btn-outline-info mt-4" id="save" data-toggle="modal" data-target="#myModal">ذخیره اطلاعات</button>
+        </div>
+
         <div id="modalsabt"></div>
 
     </div>
