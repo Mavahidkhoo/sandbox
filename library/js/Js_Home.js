@@ -46,18 +46,16 @@ function showPosts() {
 
                     $('#posts').append(`
             <div class="row col-12 box">
-                <div class="container col-8 mt-5">
-                    <hr>
+                <div class="container col-8 mt-5">  
                     <div class="text-info">${value.title}<br></div>
                     <div class="mr-5">${value.body}<br></div>
-                    <div class="text-left">نویسنده : 
+                    <div class="text-left mb-2">نویسنده : 
                     <span class="text-danger">${value.displayName}</span>
                     </div>
                     <div id="edit">
                     ${value.postOwner ? `<a style='text-decoration:none' href=Pages/Post/index2.html?postid=${value.id} class=pl-4 '> ویرایش </a>   
                     <a class='text-primary action-delete' postid=${value.id} style='cursor: pointer;'> حذف </a>` : ''}
                     </div>
-                    <hr>
                 </div>
             </div>
         `);
