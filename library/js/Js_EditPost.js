@@ -19,7 +19,7 @@ $(document).ready(function() {
                  </div> 
                  </div> 
                  </div>`);
-        setTimeout(function() { window.location.href = "http://localhost/sandbox/index.html"; }, 1000);
+        setTimeout(function() { window.location.href = "../../index.html"; }, 1000);
 
     })
 
