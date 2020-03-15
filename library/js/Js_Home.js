@@ -4,8 +4,9 @@ var postEndPoint = 'server/api/post.php';
 var loginurl = 'server/api/account.php';
 var modal = document.getElementById('myModal');
 var postid;
+var profileImage;
 $(document).ready(function() {
-    $("#searchUser").click(function() { window.location.href = 'Pages/User/index.html'; })
+    userInformation();
     showPosts();
     checkLogin();
     $('body').on('click', '#exit', function() {
@@ -13,7 +14,7 @@ $(document).ready(function() {
             CRUD: 'sign-out'
         };
         var result = send('server/api/account.php', data);
-        //onsole.log(result);
+        //console.log(result);
         location.reload();
     });
     $('body').on('click', '.action-delete', function() {
@@ -27,6 +28,7 @@ $(document).ready(function() {
         Deletepost(postid);
         location.reload();
     });
+    $("#searchUser").click(function() { window.location.href = 'Pages/User/index.html'; })
 
 
 
@@ -68,7 +70,7 @@ function checkLogin() {
         CRUD: 'check'
     };
     var result = send(loginurl, data);
-    console.log(result);
+  //  console.log(result);
     if (!result.error) {
         $("#exit").removeClass("d-none");
         $("#Enter").addClass("d-none");
@@ -76,7 +78,6 @@ function checkLogin() {
         $("#imgPro").removeClass("d-none");
         $("#userAcc").removeClass("d-none");
         $("#userAcc").html(result.response.displayName);
-        $("#imgPro").attr("src", "library/img/" + result.response.profileImage);
         $("#editPro").removeClass("d-none");
         $("#creatPost").removeClass("d-none");
         $("#editPro").click(function() { window.location.href = 'Pages/UserEditProfile/index.html'; })
@@ -90,7 +91,17 @@ function Deletepost(postid) {
         postId:postid
     };
     var result = send(postEndPoint, data);
-    console.log(postid);
-    console.log(result);
+   // console.log(postid);
+  //  console.log(result);
     
+};
+function userInformation() {
+    var data = {
+        CRUD: 'get'
+    };
+    var result = send(loginurl, data);
+   
+    $("#imgPro").attr("src", "library/img/" + result.response.profileImage);
+    
+
 };

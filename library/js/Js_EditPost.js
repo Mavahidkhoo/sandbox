@@ -61,7 +61,7 @@ function update() {
 
 
 
-    console.log(result.response);
+    //console.log(result.response);
 }
 
 function geturl() {

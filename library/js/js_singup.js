@@ -64,7 +64,7 @@ function sign_up() {
     if (result.error == false) {
         var s = "اکانت شما با موفقیت ثبت شد.";
         modalpage(s);
-        setTimeout(function() { window.location.href = "http://localhost/sandbox/Pages/Account/index.html"; }, 1000);
+        setTimeout(function() { window.location.href = "index.html"; }, 1000);
 
     } else {
         if (name == '') {

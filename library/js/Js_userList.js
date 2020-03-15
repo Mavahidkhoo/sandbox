@@ -93,7 +93,11 @@ function checkLogin() {
         CRUD: 'check'
     };
     var result = send(loginurl, data);
-    $("#username").html(result.response.username);
+    $("#username").html(result.response.displayName);
     $("#imgPro").attr("src", "../../library/img/" + result.response.profileImage);
-    console.log(result.response.profileImage)
+    if (result.response.profileImage != undefined) {
+        $("#imgPro").show();
+    }
+
+    // console.log(result.response.profileImage)
 }

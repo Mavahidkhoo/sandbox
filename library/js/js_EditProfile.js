@@ -2,7 +2,7 @@ var editProfileurl = '../../server/api/account.php';
 var userInformationurl = '../../server/api/account.php';
 var loginurl = '../../server/api/account.php';
 var changepasswordurl = '../../server/api/account.php';
-var profileImage = '';
+var profileImage;
 var name = '';
 var family = '';
 var username = '';
@@ -106,7 +106,6 @@ function userInformation() {
     var result = send(editProfileurl, data);
     $("#imgPro").removeClass("d-none");
     $("#userAcc").removeClass("d-none");
-    $("#userAcc").html(result.response.name);
     $("#imgPro").attr("src", "../../library/img/" + result.response.profileImage);
     $("#name").val(result.response.name);
     $("#family").val(result.response.family);
@@ -124,6 +123,8 @@ function checkLogin() {
     };
     var result = send(loginurl, data);
     $("#username").val(result.response.username);
+    $("#userAcc").html(result.response.displayName);
+
 }
 
 
@@ -147,7 +148,7 @@ function modalpage(s) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">ساخت اکانت</h4>
+                <h4 class="modal-title">ویرایش پروفایل </h4>
             </div>
             <div class="modal-body">
          <p id='p'>${s}</p> 
@@ -189,14 +190,11 @@ function editPro() {
     if (result.error == false) {
         var s = "پروفایل شما با موفقیت ویرایش شد."
         modalpage(s);
-    } else {
-        console.log(result.response);
-
     }
 
     setTimeout(function() {
         location.reload();
-        window.location.href = "../../index.html";
+        window.location.href = `../../index.html`;
     }, 1200);
 
 
@@ -207,7 +205,6 @@ function passChange() {
     password = $("#oldPass").val();
     newPassword = $("#newPass").val();
     password2 = $("#confPass").val();
-
     var data = {
         CRUD: 'change-password',
         password: password,
@@ -234,18 +231,25 @@ function passChange() {
         return;
     } else { $("#confirmError").addClass('d-none'); }
     if (result.response.message == "Password changed successfully") {
-        $("#modalsabt").append(`<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"> تغییر گذرواژه</h4>
-            </div>
-            <div class="modal-body">
-         <p id='p'>گذرواژه تغییر کرد.</p> 
-         </div> 
-         </div> 
-         </div> 
-         </div>`);
+        $("#modalsabt").append(` < div class = "modal fade"
+            id = "myModal"
+            role = "dialog" >
+                <
+                div class = "modal-dialog" >
+                <
+                div class = "modal-content" >
+                <
+                div class = "modal-header" >
+                <
+                h4 class = "modal-title" > تغییر گذرواژه < /h4> < /
+                div > <
+                div class = "modal-body" >
+                <
+                p id = 'p' > گذرواژه تغییر کرد. < /p>  < /
+                div > <
+                /div>  < /
+                div > <
+                /div>`);
         setTimeout(function() { window.location.href = "index.html"; }, 1000);
 
     }
