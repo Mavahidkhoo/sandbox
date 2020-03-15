@@ -52,7 +52,7 @@ function showPosts() {
                     <span class="text-danger">${value.displayName}</span>
                     </div>
                     <div id="edit">
-                    ${value.postOwner ? `<a style='text-decoration:none' href=Pages/post/index2.html?postid=${value.id} class=pl-4 '> ویرایش </a>   
+                    ${value.postOwner ? `<a style='text-decoration:none' href=Pages/Post/index2.html?postid=${value.id} class=pl-4 '> ویرایش </a>   
                     <a class='text-primary action-delete' postid=${value.id} style='cursor: pointer;'> حذف </a>` : ''}
                     </div>
                     <hr>
@@ -80,7 +80,7 @@ function checkLogin() {
         $("#editPro").removeClass("d-none");
         $("#creatPost").removeClass("d-none");
         $("#editPro").click(function() { window.location.href = 'Pages/UserEditProfile/index.html'; })
-        $("#creatPost").click(function () { window.location.href = 'Pages/post/index.html'; })
+        $("#creatPost").click(function () { window.location.href = 'Pages/Post/index.html'; })
         $("#searchUser").click(function () { window.location.href = 'Pages/User/index.html';})
     }
 };
