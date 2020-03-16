@@ -73,6 +73,7 @@ function get() {
         userId: userid
     };
     var result = send(listurl, data);
+    $("#showUser2").empty();
     //console.log(result.response.profileImage);
     // <img class='float-left  rounded rounded-circle' alt="Deleted Image" src=../../library/img/${result.response.profileImage} width=100 height=100>
     $('#showUser2').append(`
@@ -80,10 +81,10 @@ function get() {
             نام : ${result.response.name ? result.response.name : null}<br>
           ${result.response.bio ? `بیوگرافی : ${result.response.bio}<br>`:''}
       
-            ${result.response.linkedIn ? `لینکدن : <a class=text-info href=https://www.linkedin.com/in/${result.response.linkedIn}>${result.response.linkedIn}</a><br>` : ''}
-           ${result.response.instagram ?` اینستاگرام : <a class=text-info href=https://www.instagram.com/${result.response.instagram}>${result.response.instagram}</a><br>`:"" }
-          ${result.response.telegram ? `  تلگرام : <a class=text-info href=https://t.me/${result.response.telegram} >${result.response.telegram}</a><br>`:""}
-          ${result.response.github ? `  گیت هاب : <a class=text-info href=https://github.com/${result.response.github}>${result.response.github}</a><br> `: ""}
+            ${result.response.linkedIn ? `لینکدن : <a target="_blank" class=text-info href=https://www.linkedin.com/in/${result.response.linkedIn}>${result.response.linkedIn}</a><br>` : ''}
+           ${result.response.instagram ?` اینستاگرام : <a target="_blank" class=text-info href=https://www.instagram.com/${result.response.instagram}>${result.response.instagram}</a><br>`:"" }
+          ${result.response.telegram ? `  تلگرام : <a target="_blank" class=text-info href=https://t.me/${result.response.telegram} >${result.response.telegram}</a><br>`:""}
+          ${result.response.github ? `  گیت هاب : <a target="_blank" class=text-info href=https://github.com/${result.response.github}>${result.response.github}</a><br> `: ""}
         </div>
 `);
 
