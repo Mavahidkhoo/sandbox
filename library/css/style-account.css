@@ -62,11 +62,11 @@ nav {
 
 .box {
     cursor: default;
-    width: 70%;
-    right: 15%;
+    width: 100%; 
     background-color: #fff7f7;
     box-shadow: 0px 3px 10px 0px #ccc;
     margin-top: 35px;
+    margin-right: 0.1%;
     padding-bottom: 2rem;
     border-top-right-radius: 50px;
     border-bottom-left-radius: 25px;

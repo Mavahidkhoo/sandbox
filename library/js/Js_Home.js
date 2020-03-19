@@ -8,18 +8,17 @@ var profileImage;
 var widthw;
 var widthd
 $(document).ready(function () {
-    // widthw = $(window).width();
-    // widthd = $(document).width();
+    widthw = $(window).width();
+    widthd = $(document).width();
     userInformation();
     showPosts();
     checkLogin();
-   // nav();
+   nav();
     $('body').on('click', '#exit', function() {
         var data = {
             CRUD: 'sign-out'
         };
         var result = send('server/api/account.php', data);
-        //console.log(result);
         location.reload();
     });
     $('body').on('click', '.action-delete', function() {
@@ -53,7 +52,7 @@ function showPosts() {
             <div class="row col-12 box">
                 <div class="container col-8 mt-5">  
                     <div class="text-info">${value.title}<br></div>
-                    <div class="mr-5">${value.body}<br></div>
+                    <div class="mr-2">${value.body}<br></div>
                     <div class="text-left mb-2">نویسنده : 
                     <span class="text-danger">${value.displayName}</span>
                     </div>
@@ -109,22 +108,22 @@ function userInformation() {
 
 };
 
-// function nav() {
+function nav() {
     
 
-//      if (widthw <= 300 || widthd <= 300) {
-//          $("#navBar").addClass('d-none');
-//     }
-//     if (widthw <= 550) { 
+     if (widthw <= 300 || widthd <= 300) {
+         $("#navBar").addClass('d-none');
+    }
+    if (widthw <= 550) { 
       
-//         $("#posts").css("font-size", "15px");
-//     }
-//     if (widthw <= 500) { 
+        $("#posts").css("font-size", "15px");
+    }
+    if (widthw <= 500) { 
       
-//         $("#posts").css("font-size", "10px");
-//     }
-//     if (widthw <= 400) { 
+        $("#posts").css("font-size", "10px");
+    }
+    if (widthw <= 400) { 
       
-//         $("#posts").css("font-size", "5px");
-//     }
-//  }
+        $("#posts").css("font-size", "5px");
+    }
+ }
