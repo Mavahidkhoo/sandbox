@@ -2,56 +2,65 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="library/css/bootstrap.min.css">
-    <link rel="stylesheet" href="library/css/style-account.css">
-    <title>Home </title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="library/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="library/css/style-account.css" />
+  <title>Home</title>
 </head>
 
 <body id="home">
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">حذف پست </h4>
-                </div>
-                <div class="modal-body">
-                    <p id='p'>از حذف کردن پست مطمئن هستید؟</p>
-                </div>
-                <div class="modal-footer btn-group">
-                    <button type="button" class="btn btn-danger rounded" id="yes">بله</button>
-                    <button type="button" class="btn btn-secondary rounded" id="no">خیر</button>
-                </div>
-            </div>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">حذف پست</h4>
         </div>
+        <div class="modal-body">
+          <p id="p">از حذف کردن پست مطمئن هستید؟</p>
+        </div>
+        <div class="modal-footer btn-group">
+          <button type="button" class="btn btn-danger rounded" id="yes">
+            بله
+          </button>
+          <button type="button" class="btn btn-secondary rounded" id="no">
+            خیر
+          </button>
+        </div>
+      </div>
     </div>
-    <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="#">خانه</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="Pages/Account/index.html" id="Enter">ورود</a>
-                </li>
-                <li>
-                    <img src="" width="5%" class="img rounded-circle d-none" alt="..." id="imgPro">
-                    <none class="mr-3 d-none text-white" id="userAcc"></none>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Pages/Account/index2.html" id="addAcc">عضویت</a>
-                </li>
-
-            </ul>
-        </div>
-        <button class="btn  btn-success ml-2 " id="searchUser"> مشاهده اعضا </button>
-        <button class="btn  btn-warning ml-2 d-none" id="creatPost"> اضافه کردن پست </button>
-        <button class="btn btn-primary ml-2 d-none" id="editPro">ویرایش پروفایل </button>
-        <button class="btn  btn-danger d-none" id="exit">خروج </button>
-
+  </div>
+  <div class="container">
+    <nav class="navbar navbar-expand" id="navBar">
+      <a class="navbar-brand" href="#">خانه</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="Pages/Account/index.html" id="Enter">ورود</a>
+          </li>
+          <li>
+            <img src="" width="5%" class="img rounded-circle d-none" alt="..." id="imgPro" />
+            <none class="mr-3 d-none text-white" id="userAcc"></none>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Pages/Account/index2.html" id="addAcc">عضویت</a>
+          </li>
+        </ul>
+      </div>
+      <button class="btn  btn-success ml-2 " id="searchUser">
+        مشاهده اعضا
+      </button>
+      <button class="btn  btn-warning ml-2 d-none" id="creatPost">
+        اضافه کردن پست
+      </button>
+      <button class="btn btn-primary ml-2 d-none" id="editPro">
+        ویرایش پروفایل
+      </button>
+      <button class="btn  btn-danger d-none" id="exit">خروج</button>
     </nav>
     <div id="posts"></div>
     <div id="Delete"></div>
-
+  </div>
 </body>
 <script src="library/js/bridg.js"></script>
 <script src="library/js/Jquery.min.js"></script>

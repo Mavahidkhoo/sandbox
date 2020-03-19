@@ -5,10 +5,15 @@ var loginurl = 'server/api/account.php';
 var modal = document.getElementById('myModal');
 var postid;
 var profileImage;
-$(document).ready(function() {
+var widthw;
+var widthd
+$(document).ready(function () {
+    // widthw = $(window).width();
+    // widthd = $(document).width();
     userInformation();
     showPosts();
     checkLogin();
+   // nav();
     $('body').on('click', '#exit', function() {
         var data = {
             CRUD: 'sign-out'
@@ -103,3 +108,23 @@ function userInformation() {
     
 
 };
+
+// function nav() {
+    
+
+//      if (widthw <= 300 || widthd <= 300) {
+//          $("#navBar").addClass('d-none');
+//     }
+//     if (widthw <= 550) { 
+      
+//         $("#posts").css("font-size", "15px");
+//     }
+//     if (widthw <= 500) { 
+      
+//         $("#posts").css("font-size", "10px");
+//     }
+//     if (widthw <= 400) { 
+      
+//         $("#posts").css("font-size", "5px");
+//     }
+//  }
